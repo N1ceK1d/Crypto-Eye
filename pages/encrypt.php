@@ -13,6 +13,7 @@
         require("../classes/RSACipher.php");
         require("../classes/CipherFile.php");
         $aes = new AESCipher();
+        $aesFile = new AESCipher();
         $rsa = new RSACipher();
         $cipher_file = new CipherFile();
     ?>
@@ -25,7 +26,6 @@
             <button name="export-data">Экспортировать данные</button>
         </form>
         <div>
-            <h1>RSA Encrypt</h1>
             <?php
                 if(isset($_POST['encryptAES'])) {
                     $key = $aes->generateKey();
@@ -56,9 +56,56 @@
                 }
             ?>
         </div>
+        <h1>AES File Encrypt</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="filename"/>
+            <button name="encryptAESFile">Зашифровать файл</button>
+            <button name="exportAESFile">Экспортировать шифротекст</button>
+            <button name="export-file-data">Экспортировать данные</button>
+        </form>
+        <div>
+            <?php
+                if(isset($_POST['encryptAESFile'])) {
+                    if ($_FILES && $_FILES["filename"]["error"] == UPLOAD_ERR_OK)
+                    {
+                        $name = $_FILES["filename"]["name"];
+                        move_uploaded_file($_FILES["filename"]["tmp_name"], $name);
+                        rename($name, "text_files/aes_file.txt");
+                        echo "Файл загружен";
+
+                        $key = $aesFile->generateKey();
+                        $aesFile->setMessage($_POST['message']);
+
+                        $aesFile->AesEncryptFile();
+                        
+                        $iv = $aesFile->getIv();
+
+                        echo "<h3>INFO</h3>";
+                        echo "<p><b>key: </b>".$key."</p>";
+                        echo "<p><b>iv: </b>".$iv."</p>";
+                        echo "<p><b>message: </b>".$aesFile->getMessage()."</p>";
+
+                        $aes_data = "ИНФОРМАЦИЯ:\nKey - $key\nIV - $iv";
+
+                        
+
+                        file_put_contents('text_files/aes-file-data.txt', $aes_data);
+                    }
+                }
+                
+                if(isset($_POST['exportAESFile'])) {
+                    $cipher_file->file_force_download('text_files/aes_file.txt');
+                }
+
+                if(isset($_POST['export-file-data'])) {
+                    $cipher_file->file_force_download('text_files/aes-file-data.txt');
+                }
+            ?>
+        </div>
     </div>
     <div>
         <div>
+            <h1>RSA Encrypt</h1>
             <form action="" method="POST">
                 <button name="generateRSAKeys">Сгенерировать ключи</button>
                 <textarea name="message"></textarea>
