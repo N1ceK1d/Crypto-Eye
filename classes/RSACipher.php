@@ -23,21 +23,25 @@ class RSACipher {
     }
 
     public function getPublicKey() {
-        var_export($this->publicKey);
+        $pubKey = var_export($this->publicKey, true);
+        return $pubKey;
     }
 
     public function getPrivateKey() {
-        var_export($this->privateKey);
+        $privKey = var_export($this->privateKey, true);
+        return $privKey;
     }
 
     public function RSAEncrypt($message, $publicKey) {
         openssl_public_encrypt($message, $encrypted, $publicKey);
-        var_export(base64_encode($encrypted));
+        $rsa_encrypt = var_export(base64_encode($encrypted), true);
+        return $rsa_encrypt;
     }
 
     public function RSADecrypt($str, $privatekey) {
         openssl_private_decrypt(base64_decode($str), $decrypted, $privatekey);
-        var_export($decrypted);
+        $rsa_decrypt = var_export($decrypted, true);
+        return $rsa_decrypt;
     }
 }
 

@@ -28,7 +28,7 @@
                     $ivValue = $_POST["iv"];
 
                     $decrypt = $aes->AesDecrypt($encryptMessage, $encryptKey, $ivValue);
-
+                    
                     echo "<p><b>encrypt message: </b>".$_POST["encrypt_message"]."</p>";
                     echo "<p><b>key: </b>".$_POST["key"]."</p>";
                     echo "<p><b>decrypt: </b>".$decrypt."</p>";
@@ -47,7 +47,8 @@
                 if(isset($_POST['decryptRSA'])) {
                     $privateKey = $_POST['privateKey'];
                     $str = $_POST['str'];
-                    $rsa->RSADecrypt($str, $privateKey);
+                    $decrypt = $rsa->RSADecrypt($str, $privateKey);
+                    echo $decrypt;
                 }
             ?>
         </div>
