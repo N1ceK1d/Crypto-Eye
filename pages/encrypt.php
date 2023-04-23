@@ -15,6 +15,7 @@
         $aes = new AESCipher();
         $aesFile = new AESCipher();
         $rsa = new RSACipher();
+        $rsaFile = new RSACipher();
         $cipher_file = new CipherFile();
     ?>
     <div>
@@ -43,16 +44,16 @@
 
                     $aes_data = "ИНФОРМАЦИЯ:\nKey - $key\nIV - $iv";
 
-                    file_put_contents('text_files/aes.txt', $encrypt);
-                    file_put_contents('text_files/aes-data.txt', $aes_data);
+                    file_put_contents('text_files/aes/aes.txt', $encrypt);
+                    file_put_contents('text_files/aes/aes-data.txt', $aes_data);
                 }
 
                 if(isset($_POST['exportAES'])) {
-                    $cipher_file->file_force_download('text_files/aes.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes.txt');
                 }
 
                 if(isset($_POST['export-data'])) {
-                    $cipher_file->file_force_download('text_files/aes-data.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes-data.txt');
                 }
             ?>
         </div>
@@ -70,7 +71,7 @@
                     {
                         $name = $_FILES["filename"]["name"];
                         move_uploaded_file($_FILES["filename"]["tmp_name"], $name);
-                        rename($name, "text_files/aes_file.txt");
+                        rename($name, "text_files/aes/aes_file.txt");
                         echo "Файл загружен";
 
                         $key = $aesFile->generateKey();
@@ -87,18 +88,16 @@
 
                         $aes_data = "ИНФОРМАЦИЯ:\nKey - $key\nIV - $iv";
 
-                        
-
-                        file_put_contents('text_files/aes-file-data.txt', $aes_data);
+                        file_put_contents('text_files/aes/aes-file-data.txt', $aes_data);
                     }
                 }
                 
                 if(isset($_POST['exportAESFile'])) {
-                    $cipher_file->file_force_download('text_files/aes_file.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes_file.txt');
                 }
 
                 if(isset($_POST['export-file-data'])) {
-                    $cipher_file->file_force_download('text_files/aes-file-data.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes-file-data.txt');
                 }
             ?>
         </div>
@@ -122,14 +121,14 @@
                         $pubKey = $rsa->getPublicKey();
                         $privKey = $rsa->getPrivateKey();
 
-                        file_put_contents('text_files/rsa-public.txt', $pubKey);
-                        file_put_contents('text_files/rsa-private.txt', $privKey);
+                        file_put_contents('text_files/rsa/rsa-public.txt', $pubKey);
+                        file_put_contents('text_files/rsa/rsa-private.txt', $privKey);
 
-                        $pubKey = file_get_contents('text_files/rsa-public.txt');
-                        file_put_contents('text_files/rsa-public.txt', mb_substr($pubKey, 1, -1));
+                        $pubKey = file_get_contents('text_files/rsa/rsa-public.txt');
+                        file_put_contents('text_files/rsa/rsa-public.txt', mb_substr($pubKey, 1, -1));
 
-                        $privKey = file_get_contents('text_files/rsa-private.txt');
-                        file_put_contents('text_files/rsa-private.txt', mb_substr($privKey, 1, -1));
+                        $privKey = file_get_contents('text_files/rsa/rsa-private.txt');
+                        file_put_contents('text_files/rsa/rsa-private.txt', mb_substr($privKey, 1, -1));
 
                         echo "<p>Публичный ключ</p>";
                         echo "<pre class='rsa-public key'>";
@@ -149,8 +148,8 @@
                         
                         file_put_contents('text_files/rsa.txt', $rsa_encrypt);
 
-                        $homepage = file_get_contents('text_files/rsa.txt');
-                        file_put_contents('text_files/rsa.txt', mb_substr($homepage, 1, -1));
+                        $homepage = file_get_contents('text_files/rsa/rsa.txt');
+                        file_put_contents('text_files/rsa/rsa.txt', mb_substr($homepage, 1, -1));
 
                         echo mb_substr($homepage, 1, -1);
                     }
@@ -158,16 +157,86 @@
                     if(isset($_POST['exportRSAKeys'])) {
 
                         $zip = new ZipArchive(); 
-                        $zip->open("text_files/RSA_keys.zip", ZIPARCHIVE::CREATE);
-                        $zip->addFile("text_files/rsa-public.txt");
-                        $zip->addFile("text_files/rsa-private.txt");
+                        $zip->open("text_files/rsa/RSA_keys.zip", ZIPARCHIVE::CREATE);
+                        $zip->addFile("text_files/rsa/rsa-public.txt");
+                        $zip->addFile("text_files/rsa/rsa-private.txt");
                         $zip->close();
 
-                        $cipher_file->file_force_download('text_files/RSA_keys.zip');
+                        $cipher_file->file_force_download('text_files/rsa/RSA_keys.zip');
                     }
     
                     if(isset($_POST['exportRSA'])) {
-                        $cipher_file->file_force_download('text_files/rsa.txt');
+                        $cipher_file->file_force_download('text_files/rsa/rsa.txt');
+                    }
+                ?>
+            </div>
+        </div>
+        <div>
+            <h1>RSA Encrypt Fiel</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="file" name="rsafile" id="">
+                <button name="generateRSAKeysFile">Сгенерировать ключи</button>
+                <textarea name="publicKeyFile"></textarea>
+                <button name="encryptRSAFile">Зашифровать</button>
+                <button name="exportRSAKeysFile">Экспортировать ключи</button>
+                <button name="exportRSAFile">Экспортировать шифротекст</button>
+            </form>
+            <div>
+                <?php
+                    if(isset($_POST['generateRSAKeysFile'])) {
+                        $rsaFile->generateKeys();
+
+                        $pubKey = $rsaFile->getPublicKey();
+                        $privKey = $rsaFile->getPrivateKey();
+
+                        file_put_contents('text_files/rsa/rsa-public-file.txt', $pubKey);
+                        file_put_contents('text_files/rsa/rsa-private-file.txt', $privKey);
+
+                        $pubKey = file_get_contents('text_files/rsa/rsa-public-file.txt');
+                        file_put_contents('text_files/rsa/rsa-public-file.txt', mb_substr($pubKey, 1, -1));
+
+                        $privKey = file_get_contents('text_files/rsa/rsa-private-file.txt');
+                        file_put_contents('text_files/rsa/rsa-private-file.txt', mb_substr($privKey, 1, -1));
+
+                        echo "<p>Публичный ключ</p>";
+                        echo "<pre class='rsa-public key'>";
+                        echo mb_substr($pubKey, 1, -1);
+                        echo "</pre>";
+
+                        echo "<p>Привытный ключ</p>";
+                        echo "<pre class='rsa-private key'>";
+                        echo mb_substr($privKey, 1, -1);
+                        echo "</pre>";
+                    }
+
+                    if(isset($_POST['encryptRSAFile'])) {
+                        if ($_FILES && $_FILES["rsafile"]["error"] == UPLOAD_ERR_OK)
+                        {
+                            $name = $_FILES["rsafile"]["name"];
+                            move_uploaded_file($_FILES["rsafile"]["tmp_name"], $name);
+                            rename($name, "text_files/rsa/rsa_file.txt");
+                            echo "Файл загружен";
+                            $publicKey = $_POST['publicKeyFile'];
+                            $message = file_get_contents('text_files/rsa/rsa_file.txt');
+                            $rsa_encrypt = $rsa->RSAEncrypt($message, $publicKey);
+                            file_put_contents('text_files/rsa/rsa_file_encrypt.txt', mb_substr($rsa_encrypt, 1, -1));
+                            echo mb_substr($rsa_encrypt, 1, -1);
+                        }
+                    }
+
+                    if(isset($_POST['exportRSAKeysFile'])) {
+
+                        $zip = new ZipArchive(); 
+                        $zip->open("text_files/rsa/RSA_file_keys.zip", ZIPARCHIVE::CREATE);
+                        $zip->addFile("text_files/rsa/rsa-public-file.txt");
+                        $zip->addFile("text_files/rsa/rsa-private-file.txt");
+                        $zip->close();
+
+                        $cipher_file->file_force_download('text_files/rsa/RSA_file_keys.zip');
+                    }
+    
+                    if(isset($_POST['exportRSAFile'])) {
+                        $cipher_file->file_force_download('text_files/rsa/rsa_file_encrypt.txt');
                     }
                 ?>
             </div>

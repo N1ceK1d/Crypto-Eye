@@ -14,6 +14,7 @@
         $aes = new AESCipher();
         $rsa = new RSACipher();
         $aesFile = new AESCipher();
+        $rsaFile = new RSACipher();
         $cipher_file = new CipherFile();
     ?>
     <div>
@@ -53,7 +54,7 @@
                     {
                         $name = $_FILES["encrypt_filename"]["name"];
                         move_uploaded_file($_FILES["encrypt_filename"]["tmp_name"], $name);
-                        rename($name, "text_files/aes_enc_file.txt");
+                        rename($name, "text_files/aes/aes_enc_file.txt");
                         echo "Файл загружен";
 
                         $key = $aesFile->generateKey();
@@ -67,18 +68,18 @@
                         $ivValue = $_POST["iv-file"];
 
                         $decrypt = $aes->AesDecryptFile($encryptKey, $ivValue);
-                        $file = file_get_contents('text_files/aes_decrypt_file.txt');
+                        $file = file_get_contents('text_files/aes/aes_decrypt_file.txt');
                         echo $file;
                     }
                 }
                 
 
                 if(isset($_POST['exportAESFile'])) {
-                    $cipher_file->file_force_download('text_files/aes_file.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes_file.txt');
                 }
 
                 if(isset($_POST['export-file-data'])) {
-                    $cipher_file->file_force_download('text_files/aes-file-data.txt');
+                    $cipher_file->file_force_download('text_files/aes/aes-file-data.txt');
                 }
             ?>
         </div>
@@ -97,6 +98,33 @@
                     $str = $_POST['str'];
                     $decrypt = $rsa->RSADecrypt($str, $privateKey);
                     echo $decrypt;
+                }
+            ?>
+        </div>
+    </div>
+    <div>
+        <h1>RSA Decrypt File</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="encrypted_rsa_file">
+            <textarea name="rsa_private_key"></textarea>
+            <button name="decrypt_rsa_file">Расшифровать файл</button>
+        </form>
+        <div>
+            <?php
+                if(isset($_POST['decrypt_rsa_file'])) {
+                    if ($_FILES && $_FILES["encrypted_rsa_file"]["error"] == UPLOAD_ERR_OK)
+                    {
+                        $name = $_FILES["encrypted_rsa_file"]["name"];
+                        move_uploaded_file($_FILES["encrypted_rsa_file"]["tmp_name"], $name);
+                        rename($name, "text_files/rsa/encrypted_rsa_file.txt");
+                        echo "Файл загружен";
+
+                        $privateKey = $_POST['rsa_private_key'];
+                        $message = file_get_contents('text_files/rsa/encrypted_rsa_file.txt');
+                        $rsa_encrypt = $rsaFile->RSADecrypt($message, $privateKey);
+                        file_put_contents('text_files/rsa/encrypted_rsa_file.txt', mb_substr($rsa_encrypt, 1, -1));
+                        echo mb_substr($rsa_encrypt, 1, -1);
+                    }
                 }
             ?>
         </div>
