@@ -10,6 +10,7 @@
     <?php
         require("../classes/HashCipher.php");
         require("../classes/CipherFile.php");
+        require("menu.php");
         $hash = new HashCipher();
         $cipher_file = new CipherFile();
     ?>

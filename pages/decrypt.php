@@ -11,6 +11,7 @@
         require("../classes/AESCipher.php");
         require("../classes/RSACipher.php");
         require("../classes/CipherFile.php");
+        require("menu.php");
         $aes = new AESCipher();
         $rsa = new RSACipher();
         $aesFile = new AESCipher();

@@ -12,11 +12,14 @@
         require("../classes/AESCipher.php");
         require("../classes/RSACipher.php");
         require("../classes/CipherFile.php");
+        require("../modules/sqlQuerys.php");
         $aes = new AESCipher();
         $aesFile = new AESCipher();
         $rsa = new RSACipher();
         $rsaFile = new RSACipher();
         $cipher_file = new CipherFile();
+        session_start();
+        require("menu.php");
     ?>
     <div>
         <h1>AES Encrypt</h1>
@@ -46,6 +49,7 @@
 
                     file_put_contents('text_files/aes/aes.txt', $encrypt);
                     file_put_contents('text_files/aes/aes-data.txt', $aes_data);
+                    
                 }
 
                 if(isset($_POST['exportAES'])) {
@@ -54,6 +58,20 @@
 
                 if(isset($_POST['export-data'])) {
                     $cipher_file->file_force_download('text_files/aes/aes-data.txt');
+                }
+            
+                if($_SESSION["login"]) {
+                    echo "<form action='' method='POST'>";
+                    echo     "<button name='saveData'>Сохранить данные</button>";
+                    echo "</form>";
+                }
+
+                if(isset($_POST['saveData'])) {
+                    $data = file_get_contents('text_files/aes/aes-data.txt');
+                    $key = mb_substr(explode(' ', $data)[2], 0, -3);
+                    $iv = explode(' ', $data)[4];
+                    $aes_string = file_get_contents('text_files/aes/aes.txt');
+                    saveAesData($_SESSION['login'], $key, $iv, $aes_string);
                 }
             ?>
         </div>
@@ -98,6 +116,20 @@
 
                 if(isset($_POST['export-file-data'])) {
                     $cipher_file->file_force_download('text_files/aes/aes-file-data.txt');
+                }
+
+                if($_SESSION["login"]) {
+                    echo "<form action='' method='POST'>";
+                    echo     "<button name='saveAesFileData'>Сохранить данные</button>";
+                    echo "</form>";
+                }
+
+                if(isset($_POST['saveAesFileData'])) {
+                    $data = file_get_contents('text_files/aes/aes-file-data.txt');
+                    $key = mb_substr(explode(' ', $data)[2], 0, -3);
+                    $iv = explode(' ', $data)[4];
+                    $aes_string = file_get_contents('text_files/aes/aes_file.txt');
+                    saveAesData($_SESSION['login'], $key, $iv, $aes_string);
                 }
             ?>
         </div>
@@ -146,7 +178,7 @@
                         $message = $_POST['message'];
                         $rsa_encrypt = $rsa->RSAEncrypt($message, $publicKey);
                         
-                        file_put_contents('text_files/rsa.txt', $rsa_encrypt);
+                        file_put_contents('text_files/rsa/rsa.txt', $rsa_encrypt);
 
                         $homepage = file_get_contents('text_files/rsa/rsa.txt');
                         file_put_contents('text_files/rsa/rsa.txt', mb_substr($homepage, 1, -1));
@@ -167,6 +199,27 @@
     
                     if(isset($_POST['exportRSA'])) {
                         $cipher_file->file_force_download('text_files/rsa/rsa.txt');
+                    }
+
+                    if($_SESSION["login"]) {
+                        echo "<form action='' method='POST'>";
+                        echo     "<button name='saveRsaKeys'>Сохранить ключи</button>";
+                        echo "</form>";
+                        echo "<form action='' method='POST'>";
+                        echo     "<button name='saveRsaString'>Сохранить строку</button>";
+                        echo "</form>";
+                    }
+    
+                    if(isset($_POST['saveRsaKeys'])) {
+                        $privKey = file_get_contents('text_files/rsa/rsa-private.txt');
+                        $publkey = file_get_contents('text_files/rsa/rsa-public.txt');
+                        $aes_string = file_get_contents('text_files/aes/aes.txt');
+                        saveRsaKeys($_SESSION['login'], $publkey, $privKey);
+                    }
+
+                    if(isset($_POST['saveRsaString'])) {
+                        $rsa_str = file_get_contents('text_files/rsa/rsa.txt');
+                        saveRsaString($_SESSION['login'], $rsa_str);
                     }
                 ?>
             </div>
@@ -237,6 +290,27 @@
     
                     if(isset($_POST['exportRSAFile'])) {
                         $cipher_file->file_force_download('text_files/rsa/rsa_file_encrypt.txt');
+                    }
+
+                    if($_SESSION["login"]) {
+                        echo "<form action='' method='POST'>";
+                        echo     "<button name='saveRsaFileKeys'>Сохранить ключи</button>";
+                        echo "</form>";
+                        echo "<form action='' method='POST'>";
+                        echo     "<button name='saveRsaFileString'>Сохранить строку</button>";
+                        echo "</form>";
+                    }
+    
+                    if(isset($_POST['saveRsaFileKeys'])) {
+                        $privKey = file_get_contents('text_files/rsa/rsa-private-file.txt');
+                        $publkey = file_get_contents('text_files/rsa/rsa-public-file.txt');
+                        $aes_string = file_get_contents('text_files/aes/aes.txt');
+                        saveRsaKeys($_SESSION['login'], $publkey, $privKey);
+                    }
+
+                    if(isset($_POST['saveRsaFileString'])) {
+                        $rsa_str = file_get_contents('text_files/rsa/rsa_file_encrypt.txt');
+                        saveRsaString($_SESSION['login'], $rsa_str);
                     }
                 ?>
             </div>
