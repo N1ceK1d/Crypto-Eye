@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./style.css" rel="stylesheet">
-    <title>Document</title>
+    <link rel="stylesheet" href="<?php echo "../css/footer.css"?>">
+    <link rel="stylesheet" href="<?php echo "../css/pages.css"?>">
+    <title>Шифрование</title>
 </head>
 <body>
     <?php 
@@ -21,13 +23,15 @@
         session_start();
         require("menu.php");
     ?>
-    <div>
+    <div class="encrypt-content">
         <h1>AES Encrypt</h1>
         <form action="" method="POST">
             <textarea name="message"></textarea>
-            <button name="encryptAES">Зашифровать</button>
-            <button name="exportAES">Экспортировать шифротекст</button>
-            <button name="export-data">Экспортировать данные</button>
+            <div class="buttons">
+                <button name="encryptAES">Зашифровать</button>
+                <button name="exportAES">Экспортировать шифротекст</button>
+                <button name="export-data">Экспортировать данные</button>
+            </div>
         </form>
         <div>
             <?php
@@ -39,11 +43,11 @@
 
                     $iv = $aes->getIv();
 
-                    echo "<h3>INFO</h3>";
-                    echo "<p><b>key: </b>".$key."</p>";
-                    echo "<p><b>iv: </b>".$iv."</p>";
-                    echo "<p><b>message: </b>".$aes->getMessage()."</p>";
-                    echo "<p><b>encrypt: </b>".$encrypt."</p>";
+                    echo "<div class='encrypt-data'> <h3>Информация</h3>";
+                    echo "<p><b>Ключ: </b>".$key."</p>";
+                    echo "<p><b>Вектор инициализации: </b>".$iv."</p>";
+                    echo "<p><b>Сообщение: </b>".$aes->getMessage()."</p>";
+                    echo "<p><b>Результат: </b>".$encrypt."</p> </div>";
 
                     $aes_data = "ИНФОРМАЦИЯ:\nKey - $key\nIV - $iv";
 
@@ -77,10 +81,18 @@
         </div>
         <h1>AES File Encrypt</h1>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="filename"/>
-            <button name="encryptAESFile">Зашифровать файл</button>
-            <button name="exportAESFile">Экспортировать шифротекст</button>
-            <button name="export-file-data">Экспортировать данные</button>
+            <div class="input__wrapper">
+               <input name="filename" type="file" id="input__file" class="input input__file" multiple>
+               <label for="input__file" class="input__file-button">
+                  <span class="input__file-button-text">Выберите файл</span>
+               </label>
+            </div>
+            <!--<input type="file" name="filename"/>-->
+            <div class="buttons">
+                <button name="encryptAESFile">Зашифровать файл</button>
+                <button name="exportAESFile">Экспортировать шифротекст</button>
+                <button name="export-file-data">Экспортировать данные</button>
+            </div>
         </form>
         <div>
             <?php
@@ -98,11 +110,13 @@
                         $aesFile->AesEncryptFile();
                         
                         $iv = $aesFile->getIv();
-
-                        echo "<h3>INFO</h3>";
-                        echo "<p><b>key: </b>".$key."</p>";
-                        echo "<p><b>iv: </b>".$iv."</p>";
-                        echo "<p><b>message: </b>".$aesFile->getMessage()."</p>";
+                        echo "<div class='encrypt-data'> <h3>Информация</h3>";
+                        echo "<p><b>Ключ: </b>".$key."</p>";
+                        echo "<p><b>Вектор инициализации: </b>".$iv."</p>";
+                        //echo "<h3>INFO</h3>";
+                        //echo "<p><b>key: </b>".$key."</p>";
+                        //echo "<p><b>iv: </b>".$iv."</p>";
+                        //echo "<p><b>message: </b>".$aesFile->getMessage()."</p>";
 
                         $aes_data = "ИНФОРМАЦИЯ:\nKey - $key\nIV - $iv";
 
@@ -141,11 +155,13 @@
                 <button name="generateRSAKeys">Сгенерировать ключи</button>
                 <textarea name="message"></textarea>
                 <textarea name="publicKey"></textarea>
-                <button name="encryptRSA">Зашифровать</button>
-                <button name="exportRSAKeys">Экспортировать ключи</button>
-                <button name="exportRSA">Экспортировать шифротекст</button>
+                <div class="buttons">
+                    <button name="encryptRSA">Зашифровать</button>
+                    <button name="exportRSAKeys">Экспортировать ключи</button>
+                    <button name="exportRSA">Экспортировать шифротекст</button>
+                </div>
             </form>
-            <div>
+            <div>    
                 <?php
                     if(isset($_POST['generateRSAKeys'])) {
                         $rsa->generateKeys();
@@ -161,16 +177,15 @@
 
                         $privKey = file_get_contents('text_files/rsa/rsa-private.txt');
                         file_put_contents('text_files/rsa/rsa-private.txt', mb_substr($privKey, 1, -1));
-
-                        echo "<p>Публичный ключ</p>";
-                        echo "<pre class='rsa-public key'>";
+                        //echo "";
+                        //echo "<div class='rsa_keys'> <div> <p class='key_type'>Публичный ключ</p> <textarea>";
                         echo mb_substr($pubKey, 1, -1);
-                        echo "</pre>";
+                        //echo "</textarea> </div>";
 
-                        echo "<p>Привытный ключ</p>";
-                        echo "<pre class='rsa-private key'>";
+                        //echo "<div><p class='key_type'>Привытный ключ</p>";
+                        //echo "<textarea>";
                         echo mb_substr($privKey, 1, -1);
-                        echo "</pre>";
+                        //echo "</textarea></div></div>";
                     }
 
                     if(isset($_POST['encryptRSA'])) {
@@ -183,7 +198,7 @@
                         $homepage = file_get_contents('text_files/rsa/rsa.txt');
                         file_put_contents('text_files/rsa/rsa.txt', mb_substr($homepage, 1, -1));
 
-                        echo mb_substr($homepage, 1, -1);
+                        echo "<h2>Результат</h2><textarea class='rsa-encrypt'>".mb_substr($homepage, 1, -1)."</textarea>";
                     }
 
                     if(isset($_POST['exportRSAKeys'])) {
@@ -213,7 +228,6 @@
                     if(isset($_POST['saveRsaKeys'])) {
                         $privKey = file_get_contents('text_files/rsa/rsa-private.txt');
                         $publkey = file_get_contents('text_files/rsa/rsa-public.txt');
-                        $aes_string = file_get_contents('text_files/aes/aes.txt');
                         saveRsaKeys($_SESSION['login'], $publkey, $privKey);
                     }
 
@@ -225,14 +239,28 @@
             </div>
         </div>
         <div>
-            <h1>RSA Encrypt Fiel</h1>
+            <h1>RSA Encrypt File</h1>
             <form action="" method="post" enctype="multipart/form-data">
-                <input type="file" name="rsafile" id="">
+            <input type="file" name="rsafile" id="">
                 <button name="generateRSAKeysFile">Сгенерировать ключи</button>
                 <textarea name="publicKeyFile"></textarea>
                 <button name="encryptRSAFile">Зашифровать</button>
                 <button name="exportRSAKeysFile">Экспортировать ключи</button>
                 <button name="exportRSAFile">Экспортировать шифротекст</button>
+            <!--<div class="input__wrapper">
+               <input name="rsa_file" type="file" id="input__file" class="input input__file" multiple>
+               <label for="input__file" class="input__file-button">
+                  <span class="input__file-button-text">Выберите файл</span>
+               </label>
+            </div>
+                <input type="file" name="rsafile">
+                <button name="generateRSAKeysFile">Сгенерировать ключи</button>
+                <textarea name="publicKeyFile"></textarea>
+                <div class="buttons">
+                    <button name="encryptRSAFile">Зашифровать</button>
+                    <button name="exportRSAKeysFile">Экспортировать ключи</button>
+                    <button name="exportRSAFile">Экспортировать шифротекст</button>
+                </div>-->
             </form>
             <div>
                 <?php
@@ -251,15 +279,23 @@
                         $privKey = file_get_contents('text_files/rsa/rsa-private-file.txt');
                         file_put_contents('text_files/rsa/rsa-private-file.txt', mb_substr($privKey, 1, -1));
 
-                        echo "<p>Публичный ключ</p>";
-                        echo "<pre class='rsa-public key'>";
+                        //echo "<div class='rsa_keys'> <div> <p class='key_type'>Публичный ключ</p> <textarea>";
                         echo mb_substr($pubKey, 1, -1);
-                        echo "</pre>";
+                        //echo "</textarea> </div>";
 
-                        echo "<p>Привытный ключ</p>";
-                        echo "<pre class='rsa-private key'>";
+                        //echo "<div><p class='key_type'>Приватный ключ</p>";
+                        //echo "<textarea>";
                         echo mb_substr($privKey, 1, -1);
-                        echo "</pre>";
+                        //echo "</textarea></div></div>";
+                        //echo "<p>Публичный ключ</p>";
+                        //echo "<pre class='rsa-public key'>";
+                        //echo mb_substr($pubKey, 1, -1);
+                        //echo "</pre>";
+
+                        //echo "<p>Привытный ключ</p>";
+                        //echo "<pre class='rsa-private key'>";
+                        //echo mb_substr($privKey, 1, -1);
+                        //echo "</pre>";
                     }
 
                     if(isset($_POST['encryptRSAFile'])) {
@@ -268,12 +304,11 @@
                             $name = $_FILES["rsafile"]["name"];
                             move_uploaded_file($_FILES["rsafile"]["tmp_name"], $name);
                             rename($name, "text_files/rsa/rsa_file.txt");
-                            echo "Файл загружен";
                             $publicKey = $_POST['publicKeyFile'];
                             $message = file_get_contents('text_files/rsa/rsa_file.txt');
                             $rsa_encrypt = $rsa->RSAEncrypt($message, $publicKey);
                             file_put_contents('text_files/rsa/rsa_file_encrypt.txt', mb_substr($rsa_encrypt, 1, -1));
-                            echo mb_substr($rsa_encrypt, 1, -1);
+                            echo "<h2>Результат</h2><textarea class='rsa-encrypt'>".mb_substr($rsa_encrypt, 1, -1)."</textarea>";
                         }
                     }
 
@@ -304,7 +339,6 @@
                     if(isset($_POST['saveRsaFileKeys'])) {
                         $privKey = file_get_contents('text_files/rsa/rsa-private-file.txt');
                         $publkey = file_get_contents('text_files/rsa/rsa-public-file.txt');
-                        $aes_string = file_get_contents('text_files/aes/aes.txt');
                         saveRsaKeys($_SESSION['login'], $publkey, $privKey);
                     }
 

@@ -45,12 +45,11 @@ class AESCipher {
     }
 
     public function AesEncryptFile() {
-        $file = file_get_contents('text_files/aes_file.txt');
+        $file = file_get_contents('text_files/aes/aes_file.txt');
 
         $this->iv = base64_encode(openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher)));
         $this->encrypted = openssl_encrypt($file, $this->cipher, $this->key, $options=0, $this->iv);
-
-        file_put_contents('text_files/aes_file.txt', $this->encrypted);
+        file_put_contents('text_files/aes/aes_file.txt', $this->encrypted);
     }
 
     public function AesDecryptFile($key, $iv) {

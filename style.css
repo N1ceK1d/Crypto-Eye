@@ -1,0 +1,96 @@
+body {
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 15% 12%;
+    margin: 0 auto;
+}
+
+.about img {
+    width: 30%;
+}
+
+.about h1 {
+    color: rgb(110, 230, 30);
+    font-size: 3em;
+    margin: 10px;
+    text-align: center;
+    border-bottom: 1px rgb(110, 230, 30) solid;
+}
+
+.about p {
+    text-align: center;
+    margin: 10px auto;
+    font-size: 20px;
+    width: 700px;
+}
+
+.functional {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.functional .func_item {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.functional .func_item h2 {
+    color:rgb(110, 230, 30);
+    border-bottom: 1px rgb(110, 230, 30) solid;
+    font-size: 30px;
+}
+
+.func_item p {
+    font-size: 20px;
+}
+
+.func_item ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.func_item li {
+    font-size: 20px;
+    margin: 0 10px;
+    text-align: center;
+    list-style: none;
+    border-bottom: 1px rgb(110, 230, 30) solid;
+    transition: .3s;
+}
+
+.func_item li:hover {
+    color: rgb(110, 230, 30);
+    cursor: pointer;
+    text-shadow: 1px 2px 12px rgb(110, 230, 30);
+}
+
+.functional .func_item img {
+    width: 10%;
+    height: 20%;
+}
+
+.ciphers {
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.ciphers h2 {
+    color:rgb(110, 230, 30);
+    border-bottom: 1px rgb(110, 230, 30) solid;
+    font-size: 30px;
+}
+
+.ciphers p {
+    font-size: 20px;
+}

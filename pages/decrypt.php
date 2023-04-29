@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Дешифрование</title>
+    <link rel="stylesheet" href="<?php echo "../css/pages.css"?>">
 </head>
 <body>
     <?php
@@ -18,7 +19,7 @@
         $rsaFile = new RSACipher();
         $cipher_file = new CipherFile();
     ?>
-    <div>
+    <div class="encrypt-content">
         <h1>AES Decrypt</h1>
         <form method="POST">
             <input placeholder="encrypt message" type="text" name="encrypt_message"/>
@@ -43,7 +44,13 @@
         </div>
         <h1>AES File Decrypt</h1>
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="encrypt_filename"/>
+            <div class="input__wrapper">
+               <input name="encrypt_filename" type="file" id="input__file" class="input input__file" multiple>
+               <label for="input__file" class="input__file-button">
+                  <span class="input__file-button-text">Выберите файл</span>
+               </label>
+            </div>
+            <!--<input type="file" name="encrypt_filename"/>-->
             <input placeholder="key" type="text" name="key-file"/>
             <input placeholder="iv" type="text" name="iv-file"/>
             <button name="decryptFile">Расшифровать</button>
@@ -56,7 +63,6 @@
                         $name = $_FILES["encrypt_filename"]["name"];
                         move_uploaded_file($_FILES["encrypt_filename"]["tmp_name"], $name);
                         rename($name, "text_files/aes/aes_enc_file.txt");
-                        echo "Файл загружен";
 
                         $key = $aesFile->generateKey();
                         $aesFile->setMessage($_POST['message']);
@@ -106,19 +112,24 @@
     <div>
         <h1>RSA Decrypt File</h1>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="file" name="encrypted_rsa_file">
+            <!--<div class="input__wrapper">
+               <input name="enc_rsa_files" type="file" id="input__file" class="input input__file" multiple>
+               <label for="input__file" class="input__file-button">
+                  <span class="input__file-button-text">Выберите файл</span>
+               </label>
+            </div>-->
+            <input type="file" name="enc_rsa_files">
             <textarea name="rsa_private_key"></textarea>
             <button name="decrypt_rsa_file">Расшифровать файл</button>
         </form>
         <div>
             <?php
                 if(isset($_POST['decrypt_rsa_file'])) {
-                    if ($_FILES && $_FILES["encrypted_rsa_file"]["error"] == UPLOAD_ERR_OK)
+                    if ($_FILES && $_FILES["enc_rsa_files"]["error"] == UPLOAD_ERR_OK)
                     {
-                        $name = $_FILES["encrypted_rsa_file"]["name"];
-                        move_uploaded_file($_FILES["encrypted_rsa_file"]["tmp_name"], $name);
+                        $name = $_FILES["enc_rsa_files"]["name"];
+                        move_uploaded_file($_FILES["enc_rsa_files"]["tmp_name"], $name);
                         rename($name, "text_files/rsa/encrypted_rsa_file.txt");
-                        echo "Файл загружен";
 
                         $privateKey = $_POST['rsa_private_key'];
                         $message = file_get_contents('text_files/rsa/encrypted_rsa_file.txt');

@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="<?php echo "../css/menu.css"; ?>">
 </head>
 <body>
     <header>
-        <nav><a href="../index.php">Crypto-EYE</a></nav>
-        <nav><a href="encrypt.php">Шифрование</a></nav>
-        <nav><a href="decrypt.php">Дешифрование</a></nav>
-        <nav><a href="hashing.php">Хэширование</a></nav>
+        <a href="../index.php"><img class="logo" src="../images/logo.png" alt=""></a>
+        <nav><a href="encrypt.php">Шифрование</a>
+        <a href="decrypt.php">Дешифрование</a>
+        <a href="hashing.php">Хэширование</a>
         <?php
             session_start();
             $link = "";
@@ -19,7 +20,11 @@
             if($_SESSION['login']) {
                 $link = "user.php";
                 $text = "Профиль";
-                echo "<nav><a href='$link'>$text</a></nav>";
+                echo "<a href='$link'>$text</a></nav>";
+            } else {
+                $link = "login.html";
+                $text = "Войти";
+                echo "<a href='$link'>$text</a></nav>";
             }
         ?>
     </header>
