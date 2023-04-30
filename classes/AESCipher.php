@@ -53,10 +53,10 @@ class AESCipher {
     }
 
     public function AesDecryptFile($key, $iv) {
-        $file = file_get_contents('text_files/aes_enc_file.txt');
+        $file = file_get_contents('text_files/aes/aes_enc_file.txt');
         $decrypted = openssl_decrypt($file, $this->cipher, $key, $options=0, $iv);
         $this->message = $decrypted;
-        file_put_contents('text_files/aes_decrypt_file.txt', $decrypted);
+        file_put_contents('text_files/aes/aes_decrypt_file.txt', $decrypted);
     }
 }
 

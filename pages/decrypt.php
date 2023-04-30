@@ -35,10 +35,11 @@
                     $ivValue = $_POST["iv"];
 
                     $decrypt = $aes->AesDecrypt($encryptMessage, $encryptKey, $ivValue);
-                    
-                    echo "<p><b>encrypt message: </b>".$_POST["encrypt_message"]."</p>";
-                    echo "<p><b>key: </b>".$_POST["key"]."</p>";
-                    echo "<p><b>decrypt: </b>".$decrypt."</p>";
+                    echo "<div class='encrypt-data'><h3>Информация</h3>";
+                    echo "<p><b>Результат: </b>".$decrypt."</p></div>";
+                    //echo "<p><b>encrypt message: </b>".$_POST["encrypt_message"]."</p>";
+                    //echo "<p><b>key: </b>".$_POST["key"]."</p>";
+                    //echo "<p><b>decrypt: </b>".$decrypt."</p>";
                 }
             ?>
         </div>
@@ -76,7 +77,8 @@
 
                         $decrypt = $aes->AesDecryptFile($encryptKey, $ivValue);
                         $file = file_get_contents('text_files/aes/aes_decrypt_file.txt');
-                        echo $file;
+                        echo "<div class='encrypt-data'><h3>Информация</h3>";
+                        echo "<p><b>Результат: </b>".$file."</p></div>";
                     }
                 }
                 
@@ -104,7 +106,8 @@
                     $privateKey = $_POST['privateKey'];
                     $str = $_POST['str'];
                     $decrypt = $rsa->RSADecrypt($str, $privateKey);
-                    echo $decrypt;
+                    echo "<div class='encrypt-data'><h3>Информация</h3>";
+                    echo "<p><b>Результат: </b>".$decrypt."</p></div>";
                 }
             ?>
         </div>
@@ -112,13 +115,7 @@
     <div>
         <h1>RSA Decrypt File</h1>
         <form action="" method="post" enctype="multipart/form-data">
-            <!--<div class="input__wrapper">
-               <input name="enc_rsa_files" type="file" id="input__file" class="input input__file" multiple>
-               <label for="input__file" class="input__file-button">
-                  <span class="input__file-button-text">Выберите файл</span>
-               </label>
-            </div>-->
-            <input type="file" name="enc_rsa_files">
+            <input type="file" name="enc_rsa_files" class="rsa_file_input">
             <textarea name="rsa_private_key"></textarea>
             <button name="decrypt_rsa_file">Расшифровать файл</button>
         </form>
@@ -135,7 +132,8 @@
                         $message = file_get_contents('text_files/rsa/encrypted_rsa_file.txt');
                         $rsa_encrypt = $rsaFile->RSADecrypt($message, $privateKey);
                         file_put_contents('text_files/rsa/encrypted_rsa_file.txt', mb_substr($rsa_encrypt, 1, -1));
-                        echo mb_substr($rsa_encrypt, 1, -1);
+                        echo "<div class='encrypt-data'><h3>Информация</h3>";
+                        echo "<p><b>Результат: </b>".mb_substr($rsa_encrypt, 1, -1)."</p></div>";
                     }
                 }
             ?>

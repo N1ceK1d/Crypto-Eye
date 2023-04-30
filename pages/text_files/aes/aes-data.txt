@@ -1,3 +1,0 @@
-ИНФОРМАЦИЯ:
-Key - 218d25ef94fee0d51c61fd76f2b9a383e16cbb74bea54698e73009b14da1fb64dd2a9cbe9ee8f2a4
-IV - BUTauCt2ryKxqWzZ4uog9w==
