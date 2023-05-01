@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Профиль</title>
+    <link rel="stylesheet" href="<? echo "../css/footer.css"?>">
+    <link rel="stylesheet" href="<? echo "../css/user.css"?>">
 </head>
 <body>
     <?php
@@ -15,8 +17,8 @@
     ?>
     <div class="user_container">
         <div class="user_info">
-            <img src="">
-            <h2><?php echo $_SESSION['login'];?></h2>
+            <img class='profile-img' src="../images/logo.png">
+            <h2 class="username"><?php echo $_SESSION['login'];?></h2>
             <?php
                 if($_SESSION['login']) {
                     echo "<form action='' method='post'>";
@@ -37,11 +39,11 @@
                     if($result = $conn->query($sql)){
                         echo "<table>";
                         echo "<tr>";
-                        echo "<td>Строка</td>";
+                        echo "<td><b>Строка</b></td>";
                         echo "</tr>";
                         foreach($result as $row){
                             echo "<tr>";
-                            echo "<td>".$row['data_string']."</td>";
+                            echo "<td class='aes-item'>".$row['data_string']."</td>";
                             echo "</tr>";
                         }
                     }
@@ -57,13 +59,13 @@
                     if($result = $conn->query($sql)){
                         echo "<table>";
                         echo "<tr>";
-                        echo "<td>Ключ</td>";
-                        echo "<td>IV</td>";
+                        echo "<td><b>Ключи</b></td>";
+                        echo "<td><b>Векторы инициализации</b></td>";
                         echo "</tr>";
                         foreach($result as $row){
                             echo "<tr>";
-                            echo "<td>".$row['aes_key']."</td>";
-                            echo "<td>".$row['aes_iv']."</td>";
+                            echo "<td class='aes-item aes-keys'><textarea>".$row['aes_key']."</textarea></td>";
+                            echo "<td class='aes-item'>".$row['aes_iv']."</td>";
                             echo "</tr>";
                         }
                     }
@@ -79,13 +81,13 @@
                     if($result = $conn->query($sql)){
                         echo "<table>";
                         echo "<tr>";
-                        echo "<td>Публичный ключ</td>";
-                        echo "<td>Приватный ключ</td>";
+                        echo "<td><b>Публичные ключи</b></td>";
+                        echo "<td><b>Приватные ключи</b></td>";
                         echo "</tr>";
                         foreach($result as $row){
                             echo "<tr>";
-                            echo "<td>".$row['public_key']."</td>";
-                            echo "<td>".$row['private_key']."</td>";
+                            echo "<td><textarea class='aes-item'>".$row['public_key']."</textarea></td>";
+                            echo "<td><textarea class='aes-item'>".$row['private_key']."</textarea></td>";
                             echo "</tr>";
                         }
                     }

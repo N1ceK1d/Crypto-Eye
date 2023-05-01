@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Хэширование</title>
+    <link rel="stylesheet" href="<? echo "../css/footer.css"?>">
+    <link rel="stylesheet" href="<? echo "../css/pages.css"?>">
 </head>
 <body>
     <?php
@@ -14,10 +16,10 @@
         $hash = new HashCipher();
         $cipher_file = new CipherFile();
     ?>
-    <div>
+    <div class="hashing">
         <form action="" method="post">
             <textarea name="text"></textarea>
-            <select name="hash-algo">
+            <select class='hash_selecter' name="hash-algo">
                 <option value="" defaultValue="true">Выберите алгоритм хэширования</option>
                 <option value="SHA-512">SHA-512</option>
                 <option value="SHA-256">SHA-256</option>
@@ -38,18 +40,22 @@
                         case 'SHA-512':
 
                             $hash->setHash( hash("sha512", $message));
-                            echo $hash->getHash();
+                            echo "<div class='encrypt-data'><h3>Информация</h3>";
+                            echo "<p><b>Результат: </b>".$hash->getHash()."</p>";
                             break;
                         case 'SHA-256':
                             $hash->setHash( hash("sha256", $message));
-                            echo $hash->getHash();
+                            echo "<div class='encrypt-data'><h3>Информация</h3>";
+                            echo "<p><b>Результат: </b>".$hash->getHash()."</p>";
                             break;
                         case 'MD5':
                             $hash->setHash( hash("md5", $message));
-                            echo $hash->getHash();
+                            echo "<div class='encrypt-data'><h3>Информация</h3>";
+                            echo "<p><b>Результат: </b>".$hash->getHash()."</p>";
                             break;
                         default:
-                            echo "<p>Введены неверные данные</p>";
+                            echo "<div class='encrypt-data'><h3>Информация</h3>";
+                            echo "<p><b>Результат: </b>Введены неверные данные</p>";
                             break;
                     }
                     file_put_contents('text_files/hash.txt', $hash->getHash());

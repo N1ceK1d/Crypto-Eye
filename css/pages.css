@@ -16,6 +16,8 @@ h1 {
     margin: 30px auto;
 }
 
+
+
 * textarea {
     border: none;
     padding: 5px;
@@ -26,13 +28,13 @@ h1 {
 
 * textarea::-webkit-scrollbar {
     display: none;
-  }
+}
    
   /* Скрываем scrollbar для IE, Edge и Firefox */
-  * textarea {
-    -ms-overflow-style: none;  /* IE и Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+* textarea {
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 form {
     margin: 0 auto;
@@ -169,4 +171,56 @@ input[type="text"] {
     text-align: center;
     display: block;
     margin: 0 auto;
+}
+
+.hashing {
+    padding-top: 30vh;
+}
+
+.hash_selecter {
+    border: none;
+    width: 20vw;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+}
+
+.user_container {
+    padding-top: 20vh;
+}
+
+@media screen and (max-width: 420px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    form textarea {
+        width: 300px;
+        height: 200px;
+        display: block;
+        padding: 0;
+        margin: 10px auto;
+    }
+
+    .rsa_keys textarea {
+        width: 300px;
+    }
+
+    .rsa-encrypt {
+        width: 300px;
+    }
+
+    .hash_selecter {
+        border: none;
+        width: 70vw;
+        font-size: 15px;
+        text-align: center;
+        margin: 0 auto;
+        padding: 10px;
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    }
+    
 }

@@ -1,0 +1,77 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 30vw;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form input {
+    width: 15vw;
+    margin: 10px auto;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 20px;
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+}
+
+form button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(110, 230, 30);
+    border: none;
+    width: 250px;
+    font-size: 20px;
+    padding: 5px 30px;
+    display: block;
+    margin: 20px auto;
+    transition: .3s;
+    border-radius: 10px;
+}
+
+form button:hover {
+    transition: .3s;
+    cursor: pointer;
+    background-color: rgb(85, 182, 20);
+    box-shadow: 1px 5px 12px rgb(110, 230, 30);
+}
+
+form a {
+    text-decoration: none;
+    color: black;
+    transition: .3s;
+}
+
+form a:hover {
+    text-decoration: underline;
+    color:rgb(110, 230, 30);
+    transition: .3s;
+}
+
+@media screen and (max-width: 420px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100vw;
+        margin: auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    form input {
+        width: 50vw;
+        margin: 10px auto;
+        font-size: 20px;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 20px;
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    }
+}

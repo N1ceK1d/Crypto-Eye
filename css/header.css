@@ -41,3 +41,16 @@ header img {
     margin: 5px auto;
     width: 7%;
 }
+
+@media screen and (max-width: 420px) {
+    header {
+        color: black;
+        padding: .5vh 0;
+        height: 15vh;
+        width: 100vw;
+        position: fixed;
+        background: rgba(255, 255, 255, 0.485);
+        backdrop-filter: blur(10px);
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    }
+}

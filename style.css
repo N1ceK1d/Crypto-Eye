@@ -94,3 +94,39 @@ body {
 .ciphers p {
     font-size: 20px;
 }
+
+@media screen and (max-width: 420px) {
+    .about {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding-top: 20vh;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+
+    .about img {
+        width: 30%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .about h1 {
+        color: rgb(110, 230, 30);
+        font-size: 3em;
+        margin: 10px;
+        text-align: center;
+        border-bottom: 1px rgb(110, 230, 30) solid;
+    }
+
+    .about p {
+        text-align: center;
+        margin: 10px auto;
+        font-size: 20px;
+        width: 300px;
+    }
+}

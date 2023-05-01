@@ -1,0 +1,282 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user_container {
+    padding: 2vw;
+    padding-top: 25vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.user_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    padding: 20px;
+    border-radius: 20px;
+    height: 50vh;
+}
+
+.profile-img {
+    width: 15vw;
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    padding: 10px;
+    border-radius: 100%;
+    transition: .3s;
+}
+
+.profile-img:hover {
+    transition: .3s;
+    box-shadow: 1px 2px 12px rgb(110, 230, 30);
+    cursor: pointer;
+}
+
+.username {
+    text-align: center;
+    transition: .3s;
+}
+
+.username:hover {
+    cursor: pointer;
+    transition: .3s;
+    color: rgb(110, 230, 30);
+    text-shadow: 1px 2px 12px rgb(110, 230, 30);
+    border-bottom: 1px rgb(110, 230, 30) solid;
+}
+
+.user_container button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(110, 230, 30);
+    border: none;
+    width: 200px;
+    font-size: 20px;
+    padding: 5px 30px;
+    display: block;
+    margin: 20px auto;
+    transition: .3s;
+    border-radius: 10px;
+}
+
+.user_container button:hover {
+    transition: .3s;
+    cursor: pointer;
+    background-color: rgb(85, 182, 20);
+    box-shadow: 1px 5px 12px rgb(110, 230, 30);
+}
+
+.user-data {
+    padding: 10px;
+}
+
+.user-strings {
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    padding: 10px;
+    margin: 1vw;
+    border-radius: 10px;
+}
+
+.user-aes-data {
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    text-align: center;
+    padding: 10px;
+    margin: 1vw;
+    border-radius: 10px;
+}
+
+.aes-item {
+    transition: .3s;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.aes-item:hover {
+    cursor: pointer;
+    background-color: rgb(110, 230, 30);
+    box-shadow: 1px 2px 12px rgb(110, 230, 30);
+    transition: .3s;
+}
+
+.user-rsa-keys table {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.user-rsa-keys {
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    text-align: center;
+    padding: 10px;
+    margin: 1vw;
+    border-radius: 10px;
+}
+
+.user-rsa-keys textarea {
+    resize: none;
+    width: 32vw;
+    height: 30vh;
+}
+
+* textarea {
+    border: none;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.615);
+    box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+    border-radius: 10px;
+}
+
+* textarea::-webkit-scrollbar {
+    display: none;
+  }
+   
+  /* Скрываем scrollbar для IE, Edge и Firefox */
+  * textarea {
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+@media screen and (max-width: 420px) {
+    .user_container {
+        padding: 0vw;
+        padding-top: 25vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    
+    .user_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        padding: 20px 0;
+        border-radius: 20px;
+        height: 50vh;
+    }
+    
+    .profile-img {
+        width: 25vw;
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        padding: 10px;
+        border-radius: 100%;
+        transition: .3s;
+        margin: 0 auto;
+    }
+    
+    .profile-img:hover {
+        transition: .3s;
+        box-shadow: 1px 2px 12px rgb(110, 230, 30);
+        cursor: pointer;
+    }
+    
+    .username {
+        text-align: center;
+        transition: .3s;
+    }
+    
+    .username:hover {
+        cursor: pointer;
+        transition: .3s;
+        color: rgb(110, 230, 30);
+        text-shadow: 1px 2px 12px rgb(110, 230, 30);
+        border-bottom: 1px rgb(110, 230, 30) solid;
+    }
+    
+    .user_container button {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: rgb(110, 230, 30);
+        border: none;
+        width: 200px;
+        font-size: 20px;
+        padding: 5px 30px;
+        display: block;
+        margin: 20px auto;
+        transition: .3s;
+        border-radius: 10px;
+    }
+    
+    .user_container button:hover {
+        transition: .3s;
+        cursor: pointer;
+        background-color: rgb(85, 182, 20);
+        box-shadow: 1px 5px 12px rgb(110, 230, 30);
+    }
+    
+    .user-data {
+        padding: 0;
+        margin: 20px 0;
+    }
+    
+    .user-strings {
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        padding: 10px;
+        margin: 1vw;
+        border-radius: 10px;
+    }
+    
+    .user-aes-data {
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        text-align: center;
+        padding: 10px;
+        margin: 1vw;
+        border-radius: 10px;
+    }
+    
+    .aes-item {
+        transition: .3s;
+        padding: 5px;
+        border-radius: 10px;
+    }
+    
+    .aes-item:hover {
+        cursor: pointer;
+        background-color: rgb(110, 230, 30);
+        box-shadow: 1px 2px 12px rgb(110, 230, 30);
+        transition: .3s;
+    }
+
+    .aes-keys {
+        width: 10vw;
+    }
+    
+    .user-rsa-keys table {
+        text-align: left;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    
+    .user-rsa-keys {
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        text-align: left;
+        padding: 10px;
+        margin: 1vw;
+        border-radius: 10px;
+    }
+    
+    .user-rsa-keys textarea {
+        resize: none;
+        width: 32vw;
+        height: 30vh;
+    }
+    
+    * textarea {
+        border: none;
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.615);
+        box-shadow: 1px 2px 12px rgba(128, 128, 128, 0.422);
+        border-radius: 10px;
+    }
+    
+    * textarea::-webkit-scrollbar {
+        display: none;
+    }
+     
+    /* Скрываем scrollbar для IE, Edge и Firefox */
+    * textarea {
+      -ms-overflow-style: none;  /* IE и Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+}

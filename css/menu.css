@@ -40,3 +40,11 @@ header img {
     margin: 5px auto;
     width: 7%;
 }
+
+@media screen and (max-width: 420px) {
+    header img {
+        display: block;
+        margin: 5px auto;
+        width: 10%;
+    }
+}
