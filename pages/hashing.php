@@ -35,7 +35,7 @@
                     $message = $_POST['text'];
                     $hashAlgo = $_POST['hash-algo'];
                     echo "<br>";
-                    
+                    //в функцию hash передаём название алгоритма и сообщение
                     switch ($hashAlgo) {
                         case 'SHA-512':
 

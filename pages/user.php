@@ -43,7 +43,7 @@
                         echo "</tr>";
                         foreach($result as $row){
                             echo "<tr>";
-                            echo "<td class='aes-item'>".$row['data_string']."</td>";
+                            echo "<td class='aes-item'><textarea class='row-item'>".$row['data_string']."</textarea></td>";
                             echo "</tr>";
                         }
                     }

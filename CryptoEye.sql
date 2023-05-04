@@ -17,6 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+/*Если ошибка, то вместо utf8mb4_0900_ai_ci поставить utf8mb4_unicode_ci */
 --
 -- База данных: `CryptoEye`
 --
